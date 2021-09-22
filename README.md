@@ -2,7 +2,7 @@
 
 This project is designed to measure temperature and log the data.
 
-## Hardware used:
+### Hardware used:
 
 #### - Aruduino Uno
 #### - KY-001 temperature module
