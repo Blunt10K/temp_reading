@@ -22,4 +22,4 @@ This data can then be used to develop a smart temperature controller for a room 
 ## Measurements
 Temperature readings are logged at the top of each minute. 
 
-Every hour, the temperature data is saved to a log file.
+Every minute, the temperature data is saved to a log file.
