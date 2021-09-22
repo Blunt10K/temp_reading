@@ -13,7 +13,7 @@ This data can then be used to develop a smart temperature controller for a room 
 #### - KY-001 temperature module
 #### - Raspberry Pi 4  
 
-### Software requirements:
+### Library dependencies:
 
 #### - OneWire (Arduino)
 #### - DallasTemperatures (Arduino)
