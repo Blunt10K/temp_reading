@@ -2,7 +2,7 @@
 
 ## Goals
 This project is designed to measure temperature and log the data.
-When enough data is collected, it is possible to visualise it. With breakdowns by time of day, month, season, year, etc.
+When enough data is collected, it is possible to visualise it. With breakdowns by hour, day, month, season, year, etc.
 
 This data can then be used to develop a smart temperature controller for a room (or multiple rooms with a network of sensors). This will be a further extension of this project.
 
