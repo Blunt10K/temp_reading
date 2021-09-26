@@ -1,23 +1,25 @@
 import mysql.connector as sqc
 
+def create_database(cursor, name):
+    cursor.execute("SHOW DATABASES")
+    for x in cursor:
+        if(x[0]==name):
+            print("Database already exists.")
+            return
+    print("Creating new database: " + name)
+    cmnd = "CREATE DATABASE " + name
+    cursor.execute(cmnd)
+
+    return
+
 class Database:
+    
+    # @staticmethod
+
+
     def __init__(self,user,password,name):
         self.db = sqc.connect(host="localhost",user=user,password=password)
         self.cursor = self.db.cursor()
-        self.cursor.execute("")
+        create_database(self.cursor,name)
 
-    @staticmethod
-    def create_database(cursor, name):
-        cursor.execute("SHOW DATABASES")
-        return
-        i = 0
-        for x in cursor:
-            if(x[i]==name):
-                print("Database already exists.")
-                return
-            i+=1
-        print("Creating new database: " + name)
-        cmnd = "CREATE DATABASE " + name
-        cursor.execute(cmnd)
 
-        return
