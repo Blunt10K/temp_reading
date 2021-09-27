@@ -20,6 +20,7 @@ class Database:
     def __init__(self,user,password,name):
         self.db = sqc.connect(host="localhost",user=user,password=password)
         self.cursor = self.db.cursor()
+        self.name = name
         create_database(self.cursor,name)
 
 
