@@ -18,8 +18,10 @@ def read_bytes(ser):
     return 
 
 def get_time():
-    date = strftime("%d,%b,%Y,%H,%M",localtime())
+    date = strftime("%d,%b,%Y",localtime())
+    time = strftime("%H:%M",localtime())
     row = date.split(",")
+    row.append(time)
     return row
 
 def write(row):
