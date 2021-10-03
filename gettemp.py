@@ -22,6 +22,7 @@ def get_time():
     time = strftime("%H:%M",localtime())
     row = date.split(",")
     row.append(time)
+    print(row)
     return row
 
 def write(row):
