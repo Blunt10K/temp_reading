@@ -1,6 +1,6 @@
 import serial
 from time import localtime, strftime, sleep
-import csv
+import pandas as pd
 
 
 def read_bytes(ser):
@@ -22,13 +22,20 @@ def get_time():
     time = strftime("%H:%M",localtime())
     row = date.split(",")
     row.append(time)
-    print(row)
     return row
 
 def write(row):
-    with open('data.csv','a',newline = '') as file:
-        filewriter = csv.writer(file,delimiter=',')
-        filewriter.writerow(row)
+    columns = ['Day','Month','Year','Time','Temperature(Celsius)']
+    df =  pd.DataFrame(columns=columns)
+    df.loc[0] = row
+
+    print(df)
+    df.to_csv('data.csv', mode='a', header=False,index=False)
+
+    return
+    # with open('data.csv','a',newline = '') as file:
+    #     filewriter = csv.writer(file,delimiter=',')
+    #     filewriter.writerow(row)
 
 
 
