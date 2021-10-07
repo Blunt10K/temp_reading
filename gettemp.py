@@ -28,8 +28,6 @@ def write(row):
     columns = ['Day','Month','Year','Time','Temperature(Celsius)']
     df =  pd.DataFrame(columns=columns)
     df.loc[0] = row
-
-    print(df)
     df.to_csv('data.csv', mode='a', header=False,index=False)
 
     return
