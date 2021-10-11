@@ -18,14 +18,14 @@ def read_bytes(ser):
     return 
 
 def get_time():
-    date = strftime("%d,%b,%Y",localtime())
-    time = strftime("%H:%M",localtime())
-    row = date.split(",")
+    date = strftime("%m-%d-%Y",localtime())
+    time = strftime("%H:%M:%S",localtime())
+    row = [date]
     row.append(time)
     return row
 
 def write(row):
-    columns = ['Day','Month','Year','Time','Temperature(Celsius)']
+    columns = ['Date','Time','Temperature(Celsius)']
     df =  pd.DataFrame(columns=columns)
     df.loc[0] = row
     df.to_csv('data.csv', mode='a', header=False,index=False)
