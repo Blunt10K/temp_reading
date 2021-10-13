@@ -1,6 +1,8 @@
 import serial
 from time import localtime, strftime, sleep
 import pandas as pd
+from to_db import *
+from mariadb import Date, Time
 
 
 def read_bytes(ser):
@@ -18,22 +20,17 @@ def read_bytes(ser):
     return 
 
 def get_time():
-    date = strftime("%m-%d-%Y",localtime())
-    time = strftime("%H:%M:%S",localtime())
-    row = [date]
-    row.append(time)
-    return row
+    date = strftime("%Y-%m-%d",localtime()).split('-')
+    time = strftime("%H:%M:%S",localtime()).split(':')
+    return date, time
 
-def write(row):
-    columns = ['Date','Time','Temperature(Celsius)']
-    df =  pd.DataFrame(columns=columns)
-    df.loc[0] = row
-    df.to_csv('data.csv', mode='a', header=False,index=False)
+def write(date, time,temperature):
+    d = Date(int(date[0]),int(date[1]),int(date[2]))
+    t = Time(int(time[0]),int(time[1]),int(time[2]))
+    
+    addTemperature(d,t,temperature)
 
     return
-    # with open('data.csv','a',newline = '') as file:
-    #     filewriter = csv.writer(file,delimiter=',')
-    #     filewriter.writerow(row)
 
 
 
@@ -45,8 +42,6 @@ while True:
     sleep(60-float(strftime("%S",localtime())))
 
     temperature = read_bytes(ser)
-    row = get_time()
+    date, time = get_time()
 
-    row.append(temperature)
-
-    write(row)
+    write(date, time, temperature)
