@@ -7,6 +7,9 @@ class Operations:
     def __init__(self):
         pass
 
+    def clock(self):
+        return float(strftime("%S",localtime()))
+        
     def get_time(self):
         date = strftime("%Y-%m-%d",localtime()).split('-')
         time = strftime("%H:%M:%S",localtime()).split(':')

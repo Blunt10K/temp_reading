@@ -1,4 +1,4 @@
-from time import sleep, localtime, strftime
+from time import sleep
 import serial
 from listener import Temp_listener
 from operations import Operations
@@ -11,7 +11,7 @@ ops = Operations()
 
 
 while True:
-    sleep(60-float(strftime("%S",localtime())))
+    sleep(60-ops.clock())
 
     temperature = listener.read_bytes()
     date, time = ops.get_time()
