@@ -2,7 +2,6 @@ from mariadb import Date, Time
 from time import strftime
 import sqlalchemy
 from to_db import Connector
-import pandas as pd
 
 def get_dates():
 

@@ -1,5 +1,6 @@
 import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
+import pandas as pd
 
 engine = sqlalchemy.create_engine("mariadb+mariadbconnector://blunt:Zomboy8897@127.0.0.1:3306/tempdatabase")
 
@@ -45,11 +46,19 @@ class Connector:
 
         return self.session.query(Temp).filter(Temp.temperature.between(low, high))
     
-    def max_temp(self):
-        return #self.session.query(Temp).filter_by(temperature = low)
+    def max_temp(self,query,timeframe):
+        df = pd.read_sql(query.statement,query.session.bind)
+        return df.groupby([timeframe])['temperature'].max()
 
-    def min_temp(self):
-        return #self.session.query(Temp).filter_by(temperature = low)
+    def min_temp(self,query,timeframe):
+        df = pd.read_sql(query.statement,query.session.bind)
+        return df.groupby([timeframe])['temperature'].min()
 
-    def avg_temp(self):
-        return #self.session.query(Temp).filter_by(temperature = low)
+    def avg_temp(self,query,timeframe):
+        df = pd.read_sql(query.statement,query.session.bind)
+        return df.groupby([timeframe])['temperature'].mean()
+
+    def describe(self,query,timeframe):
+        df = pd.read_sql(query.statement,query.session.bind)
+        return df.groupby([timeframe])['temperature'].descibe()
+

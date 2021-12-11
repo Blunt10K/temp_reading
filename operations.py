@@ -7,6 +7,9 @@ class Operations:
     def __init__(self):
         self.conn = Connector()
 
+    def get_connector(self):
+        return self.conn
+        
     def clock(self):
         return float(strftime("%S",localtime()))
         
