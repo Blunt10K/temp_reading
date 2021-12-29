@@ -1,8 +1,10 @@
 import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
 import pandas as pd
+from os import environ
 
-engine = sqlalchemy.create_engine("mariadb+mariadbconnector://blunt:Zomboy8897@127.0.0.1:3306/tempdatabase")
+
+engine = sqlalchemy.create_engine("mariadb+mariadbconnector://"+environ.get("USER")+":"+environ.get("PSWD")+"@127.0.0.1:3306/tempdatabase")
 
 Base = declarative_base()
 

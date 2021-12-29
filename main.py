@@ -17,3 +17,4 @@ while True:
     ops.write(date, time, temperature)
 
     listener.display_temp(temperature)
+    # listener.last_reading()

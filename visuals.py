@@ -7,41 +7,48 @@ from datetime import date
 
 app = dash.Dash(__name__)
 colours = {'text': '#0000FF', 'background':'#FFFFFF'}
-# font = {'font'}
+text_size = {'H1':48,'H2':40,'text':36}
 
 app.layout = html.Div(style={'backgroundColor':colours['background'],'fontFamily':'calibri'}, children=[
 
     html.H1(children='Room Temperature',
         style = {'textAlign': 'center',
-                 'color':colours['text']}),
+                 'color':colours['text'],
+                 'fontSize':text_size['H1']}),
 
     html.H2(children='A simple dashboard exercise',
-            style = {'textAlign': 'center','color':colours['text']}),
+            style = {'textAlign': 'center','color':colours['text'],'fontSize':text_size['H2']}),
 
     html.Div(children=[
-        html.Label("Stats"),
-        dcc.RadioItems(
-            options=[
-                {'label': 'max','value':'max'},
-                {'label': 'min','value':'min'},
-                {'label': 'mean','value':'mean'},
-                {'label': 'describe','value':'describe'}
-            ]
-        )
-    ],style = {'color':colours['text']}),
+            html.Div(children = [
+                    dcc.DatePickerRange(
+                        id='date_picker',
+                        min_date_allowed = date(2021,9,1),
+                        max_date_allowed = date.today(),
+                        initial_visible_month = date.today(),
+                        end_date = date.today()
+                    ),
+                    html.Div(id = 'date_picker_html')
+                ],
+                style = {'textAlign': 'left','color':colours['text'],'fontSize':text_size['text']}
+            ),
+            
+            html.Div(children = [
+                        html.Label("Stats",style = {'textAlign': 'right','color':colours['text'],'fontSize':text_size['text']}),
 
-    html.Br(),
+                        dcc.RadioItems(
+                            options=[
+                                {'label': 'max','value':'max'},
+                                {'label': 'min','value':'min'},
+                                {'label': 'mean','value':'mean'},
+                                {'label': 'describe','value':'describe'}
+                            ]
+                        )
+                    ], style = {'textAlign': 'right','color':colours['text'],'fontSize':text_size['text']}
+            )
+        ],style = {'width':'100%','display':'inline-block'}
+    ),
 
-    html.Div([
-        dcc.DatePickerRange(
-            id='date_picker',
-            min_date_allowed = date(2021,9,1),
-            max_date_allowed = date.today(),
-            initial_visible_month = date.today(),
-            end_date = date.today()
-        ),
-        html.Div(id = 'date_picker_html')
-    ]),
 
     html.Br(),
     html.Br(),
