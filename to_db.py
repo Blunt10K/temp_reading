@@ -30,6 +30,10 @@ class Connector:
         self.session.add(temp)
         self.session.commit()
 
+    def get_data(self):
+        q = self.session.query(Temp)
+        return pd.read_sql(q.statement,q.session.bind)
+
     def dates(self, first, last = None):
         if(last == None):
             return self.session.query(Temp).filter_by(date = first)
