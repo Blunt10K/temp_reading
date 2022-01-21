@@ -1,5 +1,6 @@
 from sense_hat import SenseHat
 import serial
+from numpy import median
 
 
 BLUE = [0,0,255]
@@ -7,6 +8,7 @@ GREEN = [0,255,0]
 RED = [255,0,0]
 
 ROTATION = 0
+NUM_READINGS = 20
 
 WARM_MIN = 16
 WARM_MAX = 28
@@ -34,15 +36,18 @@ class Temp_listener:
 
     def read_temp(self):
         while True:
+            readings = []
             try:
-                bytes = self.ser.readline()
-                decoded = bytes[0:len(bytes)-2].decode("utf-8")
-                decoded = float(decoded)
+                for i in range(NUM_READINGS):
+                    bytes = self.ser.readline()
+                    decoded = bytes[0:len(bytes)-2].decode("utf-8")
+                    decoded = float(decoded)
+                    readings.append(decoded)
                 break
             except:
                 pass
 
-        return decoded
+        return median(decoded)
 
     def read_humidity(self):
         return self.sense.get_humidity()
