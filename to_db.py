@@ -36,21 +36,28 @@ class Connector:
 
     def dates(self, first, last = None):
         if(last == None):
-            return self.session.query(Temp).filter_by(date = first)
+            q = self.session.query(Temp).filter_by(date = first)
+            return pd.read_sql(q.statement,q.session.bind)
 
-        return self.session.query(Temp).filter(Temp.date.between(first, last))
+        q = self.session.query(Temp).filter(Temp.date.between(first, last))
+        return pd.read_sql(q.statement,q.session.bind)
     
     def hours(self, low, high=None):
         if(high == None):
-            return self.session.query(Temp).filter_by(time = low)
+            q = self.session.query(Temp).filter_by(time = low)
+            return pd.read_sql(q.statement,q.session.bind)
 
-        return self.session.query(Temp).filter(Temp.time.between(low, high))
+        q = self.session.query(Temp).filter(Temp.time.between(low, high))
+        return pd.read_sql(q.statement,q.session.bind)
 
     def temp_range(self, low, high = None):
         if(high == None):
-            return self.session.query(Temp).filter_by(temperature = low)
+            q = self.session.query(Temp).filter_by(temperature = low)
+            return pd.read_sql(q.statement,q.session.bind)
 
-        return self.session.query(Temp).filter(Temp.temperature.between(low, high))
+        q = self.session.query(Temp).filter(Temp.temperature.between(low, high))
+        return pd.read_sql(q.statement,q.session.bind) 
+        
     
     def max_temp(self,query,timeframe):
         df = pd.read_sql(query.statement,query.session.bind)
