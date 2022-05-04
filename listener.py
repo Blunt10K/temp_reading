@@ -35,6 +35,7 @@ class Temp_listener:
 
 
     def read_temp(self):
+        readings = []
         while True:
             readings = []
             try:
@@ -47,7 +48,7 @@ class Temp_listener:
             except:
                 pass
 
-        return median(decoded)
+        return median(readings)
 
     def read_humidity(self):
         return self.sense.get_humidity()
