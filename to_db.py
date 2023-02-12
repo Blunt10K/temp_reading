@@ -4,7 +4,7 @@ import pandas as pd
 from os import environ
 
 
-engine = sqlalchemy.create_engine("mariadb+mariadbconnector://"+environ.get("USER")+":"+environ.get("PSWD")+"@127.0.0.1:3306/tempdatabase")
+engine = sqlalchemy.create_engine("mariadb+mariadbconnector://"+environ.get("USER")+":"+environ.get("PSWD")+"@127.0.0.1:3306/climate")
 
 Base = declarative_base()
 
